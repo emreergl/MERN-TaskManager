@@ -1,8 +1,8 @@
-﻿import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
-import TaskItem from './TaskItem';
-import Spinner from './Spinner';
+﻿import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
+import TaskItem from "./TaskItem";
+import Spinner from "./Spinner";
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -12,8 +12,8 @@ const TaskList = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/tasks', {
-                    headers: { Authorization: Bearer  }
+                const res = await axios.get("http://localhost:5000/api/tasks", {
+                    headers: { Authorization: "Bearer " + user.token }
                 });
                 setTasks(res.data);
             } catch (err) {

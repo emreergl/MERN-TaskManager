@@ -1,15 +1,15 @@
-﻿import React, { useContext } from 'react';
-import axios from 'axios';
-import { AuthContext } from '../context/AuthContext';
+﻿import React, { useContext } from "react";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 const TaskItem = ({ task }) => {
     const { user } = useContext(AuthContext);
 
     const handleDelete = async () => {
-        if (!window.confirm('Silmek istediginize emin misiniz?')) return;
+        if (!window.confirm("Silmek istediginize emin misiniz?")) return;
         try {
-            await axios.delete(http://localhost:5000/api/tasks/, {
-                headers: { Authorization: Bearer  }
+            await axios.delete("http://localhost:5000/api/tasks/" + task._id, {
+                headers: { Authorization: "Bearer " + user.token }
             });
             window.location.reload();
         } catch (err) {
@@ -19,8 +19,8 @@ const TaskItem = ({ task }) => {
 
     const handleStatusChange = async (e) => {
         try {
-            await axios.put(http://localhost:5000/api/tasks/, { status: e.target.value }, {
-                headers: { Authorization: Bearer  }
+            await axios.put("http://localhost:5000/api/tasks/" + task._id, { status: e.target.value }, {
+                headers: { Authorization: "Bearer " + user.token }
             });
             window.location.reload();
         } catch (err) {
@@ -29,7 +29,7 @@ const TaskItem = ({ task }) => {
     };
 
     return (
-        <div className={	ask-card }>
+        <div className={"task-card " + task.status}>
             <h4>{task.title}</h4>
             <p>{task.description}</p>
             <small>Kategori: {task.category?.name}</small>
